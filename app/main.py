@@ -82,7 +82,7 @@ async def extract(file: UploadFile = File(...), preprocess: str = "thresh"):
         os.remove(temp_path)
         os.remove(processed_image)
 
-        api_url = "http://localhost:8000/api/v1/extract"
+        api_url = "https://team04ekyc-database.onrender.com/api/v1/extract/"
         data = {
             "document_type": document_type,
             "extracted_data": extracted_data
