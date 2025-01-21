@@ -20,8 +20,11 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
+@app.get('/')
+async def home_page():
+    return {"msg":"this is ocr-api"}
 
-@app.post("/predict/")
+@app.post("/predict")
 async def predict(file: UploadFile = File(...), preprocess: str = "thresh"):
     try:
         # Save the uploaded file temporarily
@@ -58,7 +61,7 @@ async def predict(file: UploadFile = File(...), preprocess: str = "thresh"):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/extract/")
+@app.post("/extract")
 async def extract(file: UploadFile = File(...), preprocess: str = "thresh"):
     try:
         # Save the uploaded file temporarily
@@ -105,6 +108,6 @@ async def extract(file: UploadFile = File(...), preprocess: str = "thresh"):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("app.main:app", host="localhost", port=3000, reload=True)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run("app.main:app", host="0.0.0.0", port=3000, reload=True)
